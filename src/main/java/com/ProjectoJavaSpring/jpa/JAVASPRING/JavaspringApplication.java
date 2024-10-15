@@ -23,18 +23,13 @@ public class JavaspringApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Motos> motos =Arrays.asList(
-			new Motos("Yamaha", "MT-07", "XYZ789", 700, 9000, 10),
-			new Motos("Corven", "Triax", "ABC123", 150, 10000, 10));
-        motosServices.crearMotos(motos);
-		System.out.println("NOmbres funcionan?");
-		
-			for (Motos m : this.motosServices.getAllMotos()) {
-				System.out.println(m);
-			}
+		this.motosServices.crearMotos(new Motos("Yamaha", "YBR", "123456", 125, 3000, 10));
+		this.motosServices.crearMotos(new Motos("Yamaha", "Mt09", "123AB6", 890, 12500, 10));
+		this.motosServices.crearMotos(new Motos("Corven", "Triax", "12BAC56", 150, 2200, 10));
 
+System.out.println("MOTOS: " + this.motosServices.getAllMotos());
 			System.out.println("MOTOS CILINDRADA 150:");
-			for(Motos m : this.motosServices.findByCilindrada(150)) {
+			for(Motos m : this.motosServices.findByCilindraje(150)) {
 				System.out.println(m);
 			}
 		}

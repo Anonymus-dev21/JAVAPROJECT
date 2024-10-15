@@ -18,14 +18,12 @@ public List<Motos> getAllMotos(){
     return motosRepository.findAll();
 }
 
-public List<Motos> findByCilindrada(int cilindrada) {
-    return this.motosRepository.findByCilindrada(cilindrada);
+public List<Motos> findByCilindraje(int cilindraje) {
+    return motosRepository.findByCilindraje(cilindraje);
 }
 
-public void crearMotos(List<Motos> motos) {
-    for (Motos m : motos) {
-        this.motosRepository.save(m);
-    }
+public void crearMotos(Motos motos) {
+    this.motosRepository.save(motos);
 }}
 
 
