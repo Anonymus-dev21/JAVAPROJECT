@@ -3,6 +3,9 @@ package com.ProjectoJavaSpring.jpa.JAVASPRING.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,5 +56,6 @@ public class Motos {
                 + ", cilindraje=" + cilindraje + ", precio=" + precio + ", stock=" + stock + "]";
     } 
     @ManyToOne(fetch = FetchType.EAGER)
+     @JsonBackReference
     private Cliente cliente;
 }

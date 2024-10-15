@@ -2,6 +2,8 @@ package com.ProjectoJavaSpring.jpa.JAVASPRING.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +33,13 @@ public class Cliente {
     public Cliente() {
 
     }
+    
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Motos> motos;
+
+    public void agregarMoto(Motos moto) {
+        this.motos.add(moto);
+        moto.setCliente(this);
+    }
 }

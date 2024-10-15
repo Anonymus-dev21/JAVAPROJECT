@@ -17,7 +17,30 @@ private ClienteRepository clienteRepository;
 @Autowired
 private MotosRepository motosRepository;
 
-
-
-
+public void  realizarCompra(Long clienteId, Integer motoId) {
+        Optional<Motos> motoOptional = motosRepository.findById(motoId);
+        if (!motoOptional.isPresent()) {
+            throw new RuntimeException("Moto no encontrada con ID: " + motoId);
+        }
+        
+        Motos moto = motoOptional.get();
+        Cliente cliente;
+        
+        // Verifico si el cliente ya existe o creo uno nuevo
+        Optional<Cliente> clienteOptional = clienteRepository.findById(clienteId);
+        if (clienteOptional.isPresent()) {
+            cliente = clienteOptional.get();
+        } else {
+          
+            cliente = new Cliente("Cliente Nuevo", 5000);
+            cliente = clienteRepository.save(cliente);  // Guarda el nuevo cliente
+        }
+        
+        // Asociar la moto al cliente
+        moto.setCliente(cliente);
+        
+        // Guardar la moto con la relación actualizada
+        motosRepository.save(moto);
+    }
 }
+

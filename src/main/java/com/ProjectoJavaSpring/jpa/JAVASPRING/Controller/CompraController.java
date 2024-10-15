@@ -12,16 +12,17 @@ import com.ProjectoJavaSpring.jpa.JAVASPRING.Services.CompraService;
 public class CompraController {
 
     @Autowired
-    private ClienteService clienteService;
+    private CompraService compraService;
 
-    @PostMapping("/realizar")
-    public ResponseEntity<?> realizarCompra(@RequestParam Long clienteId,
-                                            @RequestParam Integer motoId) {
-        try {
-            clienteService.realizarCompra(clienteId, motoId);
-            return ResponseEntity.ok().body("Compra realizada con éxito");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al realizar la compra: " + e.getMessage());
+           @PostMapping("/realizar")
+        public String realizarCompra(@RequestParam Long clienteId, 
+                                     @RequestParam Integer motoId) {
+            try {
+                compraService.realizarCompra(clienteId, motoId);
+                return "Compra realizada exitosamente";
+            } catch (RuntimeException e) {
+                return "Error en la compra: " + e.getMessage();
+            }
         }
     }
-}
+
