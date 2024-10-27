@@ -7,4 +7,7 @@ import java.util.List;
 import com.ProjectoJavaSpring.jpa.JAVASPRING.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
+
 }

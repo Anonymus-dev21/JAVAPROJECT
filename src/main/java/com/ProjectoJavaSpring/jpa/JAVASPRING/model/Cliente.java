@@ -1,9 +1,11 @@
 package com.ProjectoJavaSpring.jpa.JAVASPRING.model;
 
-import java.util.List;
+
+
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,10 +25,14 @@ public class Cliente {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(nullable = false, unique = true)
     private Long id;
-    private String nombre;  
+    private String name;  
     private Integer ingresosMensuales;
-    public Cliente(String nombre, Integer ingresosMensuales) {
-        this.nombre = nombre;
+    private String email;
+    private String phone;
+    public Cliente(String name ,Integer ingresosMensuales, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         this.ingresosMensuales = ingresosMensuales;
     }
 
@@ -34,9 +40,9 @@ public class Cliente {
 
     }
     
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference
-    private List<Motos> motos;
+    private List<Motos> motos = new ArrayList<>();
 
     public void agregarMoto(Motos moto) {
         this.motos.add(moto);

@@ -38,22 +38,22 @@ public class Motos {
     @Column(nullable = false, unique = true)
     private String matricula;
     private int cilindraje;
-    private int stock;
+    
     private int precio;
     
-    public Motos(String marca, String modelo, String matricula, int cilindraje, int precio, int stock) {
+    public Motos(String marca, String modelo, String matricula, int cilindraje, int precio ) {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
         this.cilindraje = cilindraje;
         this.precio = precio;
-        this.stock = stock;
+       
     }
 
     @Override
     public String toString() {
         return "Motos [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", matricula=" + matricula
-                + ", cilindraje=" + cilindraje + ", precio=" + precio + ", stock=" + stock + "]";
+                + ", cilindraje=" + cilindraje + ", precio=" + precio + "]";
     } 
     @ManyToOne(fetch = FetchType.EAGER)
      @JsonBackReference
